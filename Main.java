@@ -1,10 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -14,20 +12,18 @@ public class Main {
         FileWriter writer3 = new FileWriter("course3.csv");
 
         String line = reader.readLine();
-        List<String[]> allStudents = new ArrayList<>();
+        String[][] allStudents = new String[100][4];
+        int index = 0;
 
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split(",");
-            allStudents.add(parts);
+            allStudents[index] = parts;
+            index++;
         }
 
-        Collections.sort(allStudents, new Comparator<String[]>() {
+        Arrays.sort(allStudents, new Comparator<String[]>() {
             public int compare(String[] s1, String[] s2) {
-                int cmp = s1[2].compareTo(s2[2]);
-                if (cmp == 0) {
-                    return Integer.compare(Integer.parseInt(s2[3]), Integer.parseInt(s1[3]));
-                }
-                return cmp;
+                return Integer.compare(Integer.parseInt(s1[3]), Integer.parseInt(s2[3]));
             }
         });
 
@@ -50,7 +46,7 @@ public class Main {
                     course = 3;
                     break;
                 default:
-                    throw new IllegalArgumentException("Invalid course: " + student[2]);
+                    throw new IllegalArgumentException("invalid course: " + student[2]);
             }
 
             switch (course) {
@@ -70,7 +66,7 @@ public class Main {
         }
 
         if (course1Count + course2Count + course3Count != 100) {
-            throw new IllegalStateException("count doesn't match");
+            throw new IllegalStateException("count not match");
         }
 
         reader.close();
