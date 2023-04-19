@@ -21,11 +21,12 @@ public class Main {
             index++;
         }
 
-        Arrays.sort(allStudents, new Comparator<String[]>() {
-            public int compare(String[] s1, String[] s2) {
-                return Integer.compare(Integer.parseInt(s1[3]), Integer.parseInt(s2[3]));
-            }
-        });
+Arrays.sort(allStudents, new Comparator<String[]>() {
+    public int compare(String[] s1, String[] s2) {
+        return Integer.parseInt(s2[3]) - Integer.parseInt(s1[3]);
+    }
+});
+
 
         int course1Count = 0;
         int course2Count = 0;
